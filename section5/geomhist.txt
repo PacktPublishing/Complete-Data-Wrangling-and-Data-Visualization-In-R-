@@ -1,0 +1,65 @@
+##############################################################
+######## histogram
+
+#### visualize the distribution of numerical variables
+#### see if there is normal distribution or not; skew
+
+library(ggplot2)
+
+head(iris)
+
+
+###basic histogram
+
+ggplot(iris,aes(Sepal.Width))+geom_histogram()
+
+### adjust binwidth
+### change the width of the histogram bins.
+
+ggplot(iris,aes(Sepal.Width))+geom_histogram(binwidth = 0.01)
+
+ggplot(iris,aes(Sepal.Width))+geom_histogram(binwidth = 0.5)
+
+###color by species
+
+ggplot(iris,aes(Sepal.Width, fill=Species))+geom_histogram()
+
+ggplot(iris,aes(Sepal.Width, fill=Species, color=Species))+
+  geom_histogram()
+
+ggplot(iris,aes(Sepal.Width, fill=Species))+
+  geom_histogram(color="black", fill="red",
+                 linetype="dashed")
+
+## add a mean line
+
+library(plyr)
+m =ddply(iris, "Species", summarise, grp.mean=mean(Sepal.Width))
+m
+
+g=ggplot(iris, aes(x=Sepal.Width, color=Species)) +
+  geom_histogram(fill="white", position="dodge")+
+  theme(legend.position="top")
+
+g
+
+g+geom_vline(data=m, aes(xintercept=grp.mean, color=Species),
+             linetype="dashed")+
+  theme(legend.position="top")
+
+# customize color
+g+geom_vline(data=m, aes(xintercept=grp.mean, color=Species),
+             linetype="dashed")+
+  theme(legend.position="top")+scale_color_manual(values=c("#999999", "#E69F00", "#56B4E9"))
+
+### frequency polygon
+
+head(diamonds)
+
+ggplot(diamonds, aes(price, colour = clarity)) +
+  geom_freqpoly(binwidth = 400)
+
+### compare densities
+
+ggplot(diamonds, aes(price,stat(density), colour = clarity)) +
+  geom_freqpoly(binwidth = 400)

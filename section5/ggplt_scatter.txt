@@ -1,0 +1,33 @@
+###############################################################
+####### Scatter Plots: explore the relationship between 
+## 2 numerical variables 
+
+library(ggplot2)
+
+data(iris)
+head(iris)
+
+summary(iris)
+
+## color by species 
+ggplot(data=iris)+
+  geom_point(mapping=aes(Sepal.Length,Sepal.Width,
+                                         color=Species))
+
+##  size (species)
+ggplot(data=iris)+
+  geom_point(mapping=aes(Sepal.Length,Sepal.Width,
+                         size=Species))
+
+
+##  shape (species)
+ggplot(data=iris)+
+  geom_point(mapping=aes(Sepal.Length,Sepal.Width,
+                         shape=Species))
+
+
+##  transparency (species)
+
+ggplot(data=iris)+
+  geom_point(mapping=aes(Sepal.Length,Sepal.Width,
+                         alpha=Species))

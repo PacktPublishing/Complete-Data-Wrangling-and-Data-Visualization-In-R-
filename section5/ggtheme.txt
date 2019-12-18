@@ -1,0 +1,37 @@
+library(ggplot2)
+library(ggthemes)
+
+head(iris)
+
+###### ordinary ggplot without theme
+
+ggplot() + 
+  geom_point(data = iris, 
+             aes(x = Petal.Width, y = Petal.Length,
+                 color = Species))
+
+##### ggplot theme
+
+ggplot() +
+  geom_point(data = iris, aes(x = Petal.Width, 
+                              y = Petal.Length,
+                              color = Species))+theme_dark()
+
+####### use ggthemes
+
+ls("package:ggthemes")[grepl("theme_", ls("package:ggthemes"))]
+
+### 1) calc theme
+
+ggplot() +
+  geom_point(data = iris, aes(x = Petal.Width, 
+                              y = Petal.Length,
+                              color = Species))+theme_calc()
+
+### 2) economist theme
+
+ggplot() + 
+  geom_point(data = iris, aes(x = Petal.Width,
+                                       y = Petal.Length,
+                                       color = Species)) + 
+  theme_economist()

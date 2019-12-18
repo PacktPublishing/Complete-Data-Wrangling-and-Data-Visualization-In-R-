@@ -1,0 +1,39 @@
+######### More qplot for data viz
+ 
+head(iris)
+
+## boxplot
+qplot(Species, Sepal.Length, data = iris, 
+      geom=c("boxplot"))#factor, quant, data, geom
+
+## voilin plot
+qplot(Species, Sepal.Length, data = iris, 
+      geom=c("violin"), trim = FALSE)
+#Violin plots are similar to box plots, 
+#except that they also show the probability density of the data 
+#at different values
+
+## Colour the boxplot
+
+qplot(Species, Sepal.Length, data = iris, 
+      geom=c("boxplot"),fill=Species)
+
+## display data points
+qplot(Species, Sepal.Length, data = iris, 
+      geom=c("boxplot","jitter"),fill=Species)
+
+#### Histogram to examine the quantitative var distribution
+
+qplot(Sepal.Width, data = iris, geom = "histogram")
+
+qplot(Sepal.Width, data = iris, geom = "histogram", fill=Species)
+
+## density plot
+
+qplot(Sepal.Width, data = iris, geom = "density",
+      color = Species)
+
+qplot(Sepal.Width, data = iris, geom = "density",
+      color = Species, linetype = Species,xlab="Sepal Width",
+      ylab="Species",main="Sepal Length of Species")
+

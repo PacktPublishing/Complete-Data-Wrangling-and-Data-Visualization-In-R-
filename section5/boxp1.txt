@@ -1,0 +1,31 @@
+######## Boxplot
+## visualize data summary
+
+library(ggplot2)
+
+head(iris)
+
+ggplot(iris,aes(x=Species,y=Sepal.Width))+geom_boxplot()
+
+## rotate the boxplot
+
+g=ggplot(iris,aes(x=Species,y=Sepal.Width))+geom_boxplot()
+
+g+coord_flip()
+
+## notched boxplot
+
+ggplot(iris,aes(x=Species,y=Sepal.Width))+
+  geom_boxplot(notch = TRUE)
+
+## change outlier color
+
+ggplot(iris,aes(x=Species,y=Sepal.Width))+
+  geom_boxplot(outlier.color = "green",outlier.size = 3)
+
+## Add mean values too
+
+g=ggplot(iris,aes(x=Species,y=Sepal.Width))+geom_boxplot()
+
+g + stat_summary(fun.y=mean, geom="point")
+

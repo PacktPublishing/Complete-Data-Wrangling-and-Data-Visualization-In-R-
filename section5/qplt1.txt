@@ -1,0 +1,29 @@
+########## Use qplot for data viz
+
+library(tidyverse)
+library(ggplot2)
+
+head(iris)
+
+## qplot(x, y, data=data)
+
+qplot(Sepal.Length,Sepal.Width,data=iris)
+
+##default: scatter plot
+
+qplot(Sepal.Length,Sepal.Width,data=iris,color=Species)
+##colour on basis of a factor variable (species)
+
+## add a smoothing line
+
+qplot(Sepal.Length,Sepal.Width,data=iris, 
+      geom = c("point", "smooth"))
+
+## smoothing (color) lines
+qplot(Sepal.Length,Sepal.Width,data=iris,color=Species,
+      geom = c("point", "smooth"))
+
+## Line
+
+qplot(Sepal.Length,Sepal.Width,data=iris,color=Species,
+      geom = c("point", "line"))

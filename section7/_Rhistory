@@ -1,0 +1,512 @@
+geom_bar(mapping = aes(x=cut, fill=color),position = "dodge")
+head(diamonds)
+### how many items fall in a factor category?
+### y-axis: count
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=color))
+ggplot(data=diamonds)+stat_count(mapping=aes(x=color))
+## outline colors
+ggplot(data=diamonds)+
+geom_bar(mapping=aes(x=clarity,color=clarity))
+##fill with colors
+ggplot(data=diamonds)+
+geom_bar(mapping=aes(x=clarity,fill=clarity))
+ggplot(data=diamonds)+
+geom_bar(mapping = aes(x=cut, fill=color)) ##stacked bar
+ggplot(data=diamonds,mapping = aes(x=cut, fill=color))+
+geom_bar(alpha=1/5,position = "identity")
+ggplot(data=diamonds)+
+geom_bar(mapping = aes(x=cut, fill=color),position = "dodge")
+### the proportion of each category
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=color,
+y=..prop..,group=1))
+m =ddply(iris, "Species", summarise, grp.mean=mean(Sepal.Width))
+m
+g=ggplot(data=m, aes(x=Species, y=grp.mean)) +
+geom_bar(stat="identity")
+g
+# Horizontal bar plot
+g + coord_flip()
+### include min, mean, max
+ggplot(data=iris)+
+stat_summary(mapping=aes(x=Species, y=Sepal.Width),
+fun.ymin = min,
+fun.ymax = max,
+fun.y=mean)
+library(dplyr)
+library(tidyverse)
+x=diamonds %>%
+count(color)
+x
+g= ggplot(x, aes(x="", y=n, fill=color))
+g + coord_polar("y", start=0)
+x=diamonds %>%
+count(cut)
+x
+g= ggplot(x, aes(x="", y=n, fill=cut))
+g + coord_polar("y", start=0)
+x=as.data.frame(x)
+x
+g= ggplot(x, aes(x="", y=n, fill=cut))
+g + coord_polar("y", start=0)
+library(ggplot2)
+head(diamonds)
+ggplot(diamonds, aes(cut, price, fill = color)) +
+stat_summary(geom = "bar", fun.y = mean, position = "dodge") +
+stat_summary(geom = "errorbar", fun.data = mean_se, position = "dodge")
+ggplot(diamonds, aes(price, fill = color)) +
+stat_summary(geom = "bar", fun.y = mean, position = "dodge") +
+stat_summary(geom = "errorbar", fun.data = mean_se, position = "dodge")
+ggplot(diamonds, aes(cut, price, fill = color)) +
+stat_summary(geom = "bar", fun.y = mean, position = "dodge") +
+stat_summary(geom = "errorbar", fun.data = mean_se, position = "dodge")
+library(tidyverse)
+mse= diamonds %>%
+group_by(cut, color) %>%
+summarise(new = list(mean_se(price))) %>%
+unnest(new)
+mse
+mse %>%
+ggplot(aes(cut, y = y, fill = color)) +
+geom_col(position = "dodge") +
+geom_errorbar(aes(ymin = ymin, ymax = ymax), position = "dodge")
+head(diamonds)
+## factor(x), quant variable(y), color= factor2
+ggplot(diamonds, aes(clarity, price, fill = color)) +
+stat_summary(geom = "bar", fun.y = mean, position = "dodge") +
+stat_summary(geom = "errorbar", fun.data = mean_se, position = "dodge")
+mse
+mse %>%
+ggplot(aes(cut, y = y, fill = color)) +
+geom_col(position = "dodge") +
+geom_errorbar(aes(ymin = ymin, ymax = ymax), position = "dodge")
+library(ggplot)
+library(ggplot2)
+head(iris)
+ggplot(iris,aes(x=Species,y=Sepal.Width))+geom_boxplot()
+g+coord_flip()
+g=ggplot(iris,aes(x=Species,y=Sepal.Width))+geom_boxplot()
+g+coord_flip()
+ggplot(iris,aes(x=Species,y=Sepal.Width))+
+geom_boxplot(notch = True)
+ggplot(iris,aes(x=Species,y=Sepal.Width))+
+geom_boxplot(notch = TRUE)
+g=ggplot(iris,aes(x=Species,y=Sepal.Width))+
+geom_boxplot(outlier.color = "red", outlier.size = 8)
+ggplot(iris,aes(x=Species,y=Sepal.Width))+
+geom_boxplot(outlier.color = "red", outlier.size = 8)
+ggplot(iris,aes(x=Species,y=Sepal.Width))+
+geom_boxplot(outlier.color = "red", outlier.size = 5)
+g=ggplot(iris,aes(x=Species,y=Sepal.Width))+geom_boxplot()
+g + stat_summary(fun.y=mean, geom="point")
+head(iris)
+ggplot(iris,aes(x=Species,y=Sepal.Width))+geom_boxplot()
+g=ggplot(iris,aes(x=Species,y=Sepal.Width))+geom_boxplot()
+g+coord_flip()
+ggplot(iris,aes(x=Species,y=Sepal.Width))+
+geom_boxplot(notch = TRUE)
+ggplot(iris,aes(x=Species,y=Sepal.Width))+
+geom_boxplot(outlier.color = "green")
+ggplot(iris,aes(x=Species,y=Sepal.Width))+
+geom_boxplot(outlier.color = "green",outlier.size = 3)
+g=ggplot(iris,aes(x=Species,y=Sepal.Width))+geom_boxplot()
+g + stat_summary(fun.y=mean, geom="point")
+library(ggplot2)
+head(iris)
+ggplot(iris, aes(x=Species, y=Sepal.Width, color=Species)) +
+geom_boxplot()
+ggplot(iris, aes(x=Species, y=Sepal.Width, color=Species)) +
+geom_boxplot()+scale_color_brewer(palette="Dark2")
+ggplot(iris, aes(x=Species, y=Sepal.Width, color=Species)) +
+geom_boxplot()+scale_color_brewer(palette="Dark1")
+ggplot(iris, aes(x=Species, y=Sepal.Width, color=Species)) +
+geom_boxplot()+scale_color_brewer(palette="Dark2")
+ggplot(iris, aes(x=Species, y=Sepal.Width, color=Species)) +
+geom_boxplot()+scale_color_brewer(palette="Set2")
+ggplot(iris, aes(x=Species, y=Sepal.Width, color=Species)) +
+geom_boxplot()+scale_color_brewer(palette="Set3")
+ggplot(iris, aes(x=Species, y=Sepal.Width, color=Species)) +
+geom_boxplot()+scale_color_manual(values=c("red","green","blue"))
+ggplot(iris, aes(x=Species, y=Sepal.Width, color=Species)) +
+geom_boxplot()+scale_color_manual(values=c("#e41a1c","green","blue"))
+ggplot(iris, aes(x=Species, y=Sepal.Width, color=Species)) +
+geom_boxplot()+scale_color_manual(values=c("#e41a1c","#377eb8","#4daf4a"))
+ggplot(iris, aes(x=Species, y=Sepal.Width, fill=Species)) +
+geom_boxplot()
+ggplot(iris, aes(x=Species, y=Sepal.Width, fill=Species)) +
+geom_boxplot()+scale_color_brewer(palette="Set3")
+ggplot(iris, aes(x=Species, y=Sepal.Width, fill=Species)) +
+geom_boxplot()+scale_color_brewer(palette="Set1")
+ggplot(iris, aes(x=Species, y=Sepal.Width, fill=Species)) +
+geom_boxplot()+scale_fill_brewer(palette = "Dark2")
+ggplot(iris, aes(x=Species, y=Sepal.Width, fill=Species)) +
+geom_boxplot()+scale_fill_brewer(palette = "Dark2")+
+theme(legend.position = "top")
+ggplot(iris, aes(x=Species, y=Sepal.Width, fill=Species)) +
+geom_boxplot(position = position_dodge(1))
+head(ToothGrowth)
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+summary(ToothGrowth)
+ggplot(ToothGrowth, aes(x=dose, y=len, fill=supp)) +
+geom_boxplot()
+ggplot(ToothGrowth, aes(x=supp, y=len, fill=dose)) +
+geom_boxplot()
+ggplot(ToothGrowth, aes(x=supp, y=len, fill=dose)) +
+geom_boxplot(position = position_dodge(1))
+ggplot(ToothGrowth, aes(x=supp, y=len, fill=dose)) +
+geom_boxplot(position = position_dodge(2))
+head(iris)
+ggplot(iris, aes(x=Species, y=Sepal.Width)) +
+geom_boxplot()
+ggplot(iris, aes(x=Species, y=Sepal.Width,color=Species)) +
+geom_boxplot()
+ggplot(iris, aes(x=Species, y=Sepal.Width, color=Species)) +
+geom_boxplot()+scale_color_manual(values=c("#e41a1c","#377eb8","#4daf4a"))
+ggplot(iris, aes(x=Species, y=Sepal.Width, color=Species)) +
+geom_boxplot()+scale_color_manual(values=c("red","purple","green"))
+ggplot(iris, aes(x=Species, y=Sepal.Width, color=Species)) +
+geom_boxplot()+scale_color_brewer(palette="Set3")
+ggplot(iris, aes(x=Species, y=Sepal.Width, color=Species)) +
+geom_boxplot()+scale_color_brewer(palette = "Dark2")
+ggplot(iris, aes(x=Species, y=Sepal.Width, fill=Species)) +
+geom_boxplot()
+ggplot(iris, aes(x=Species, y=Sepal.Width, fill=Species)) +
+geom_boxplot()+scale_fill_brewer(palette = "Dark2")
+ggplot(iris, aes(x=Species, y=Sepal.Width, fill=Species)) +
+geom_boxplot()+scale_fill_brewer(palette = "Dark2")+
+theme(legend.position = "top")
+ggplot(iris, aes(x=Species, y=Sepal.Width, fill=Species)) +
+geom_boxplot()+scale_fill_brewer(palette = "Set3")+
+theme(legend.position = "bottom")
+head(ToothGrowth)
+summary(ToothGrowth)
+ggplot(ToothGrowth, aes(x=dose, y=len, fill=supp)) +
+geom_boxplot()
+ggplot(ToothGrowth, aes(x=supp, y=len, fill=dose)) +
+geom_boxplot()
+library(tidyverse)
+vignette("tibble")
+class(iris)
+i=as_tibble(iris)
+head()
+head(i)
+nycflights13::flights %>% View()
+install.packages("nycflights13")
+library((nycflights13)
+)
+library(nycflights13)
+nycflights13::flights %>% View()
+nycflights13 %>% View()
+vignette("tibble")
+class(iris)
+i=as_tibble(iris)
+head(i)
+nycflights13::flights %>% View()
+install.packages("gridExtra")
+library(tidyverse)
+head(iris)
+iris %>%
+select(sepal_l=Sepal.Length,sepal_w=Sepal.Width,iris_s=Species)
+sep=iris %>%
+select(sepal_l=Sepal.Length,sepal_w=Sepal.Width,iris_s=Species)
+head(sep)
+r = iris %>%
+rename(petal_w=Petal.Width)
+head(r)
+strl = iris %>% select_all(str_to_lower)
+head(strl)
+library(tidyverse)
+head(iris)
+r = iris %>%
+rename(petal_w=Petal.Width)
+head(r)
+sep=iris %>%
+select(sepal_l=Sepal.Length,sepal_w=Sepal.Width,iris_s=Species)
+head(sep)
+strl = iris %>% select_all(str_to_lower)
+con1 = iris %>% rename_if(!is.numeric,str_to_lower)
+con1 = iris %>% rename_if(is.numeric,str_to_lower)
+con1 = iris %>% rename_if(is.numeric,str_to_upper)
+head(con1)
+c
+con2 - iris %>% rename_at(vars(starts_with("P")),str_to_lower)
+con2 = iris %>% rename_at(vars(starts_with("P")),str_to_lower)
+head(con2)
+head(mtcars)
+x = mtcars %>% rownames_to_column("model")
+head(x)
+install.packages("ecolMod")
+install.packages("SDMTools")
+install.packages("spatialEco")
+install.packages("diveRsity")
+setwd("~/Desktop/forecast/Data viz_r/Data and Code/section7")
+getwd()
+setwd("/Users/apple/Dropbox/PKNP")
+data=read.csv("Landsat_alos_chm1.csv")
+head(data)
+summary(data)
+jm.dist <- function ( Vector.1 , Vector.2 ) {
+Matrix.1 <- as.matrix (Vector.1)
+Matrix.2 <- as.matrix (Vector.2)
+mean.Matrix.1 <- mean ( Matrix.1 )
+mean.Matrix.2 <- mean ( Matrix.2 )
+mean.difference <- mean.Matrix.1 - mean.Matrix.2
+cv.Matrix.1 <- cov ( Matrix.1 )
+cv.Matrix.2 <- cov ( Matrix.2 )
+p <- ( cv.Matrix.1 + cv.Matrix.2 ) / 2
+# calculate the Bhattacharryya index
+bh.distance <- 0.125 *t ( mean.difference ) * p^ ( -1 ) * mean.difference +
+0.5 * log (det ( p ) / sqrt (det ( cv.Matrix.1 ) * det ( cv.Matrix.2 )))
+# calculate Jeffries-Matusita
+# following formula is bound between 0 and 2.0
+jm.distance <- 2 * ( 1 - exp ( -bh.distance ) )
+# also found in the bibliography:
+# jm.distance <- 1000 * sqrt (   2 * ( 1 - exp ( -bh.distance ) )   )
+# the latter formula is bound between 0 and 1414.0
+return(jm.distance)
+}
+df = data[, 1:8]
+head(df)
+install.packages("proxy")
+library(proxy)
+dist(df,method=jm.dist,by_rows=FALSE)
+ProbMatrix <- rbind(1:10/sum(1:10), 20:29/sum(20:29),30:39/sum(30:39))
+ProbMatrix
+stats::dist(df, method = "euclidean")
+stats::dist(df, method = "bhattacharyya")
+stats::dist(df, method = "euclidean")
+install.packages("distances")
+require(fpc)
+head(data)
+library(tidyverse)
+df = data %>% select(split_landsatb_B1,split_landsatb_B2)
+head(df)
+df = data %>% select(split_landsatb_B1,split_landsatb_B2,split_landsatb_B3,split_landsatb_B4,split_landsatb_B5,split_landsatb_B6,split_landsatb_B7,split_landsatb_B8,class)
+head(df)
+df$class = as.factor(df$class)
+head(df)
+t = df %>% group_by(class) %>%
+summarise(b1 = mean(split_landsatb_B1))
+t
+t = df %>% group_by(class) %>%
+summarise(b1 = mean(split_landsatb_B1),
+b2 = mean(split_landsatb_B2),
+b3 = mean(split_landsatb_B3),
+b4 =mean(split_landsatb_B1))
+t
+t = df %>% group_by(class) %>%
+summarise(b1 = mean(split_landsatb_B1),
+b2 = mean(split_landsatb_B2),
+b3 = mean(split_landsatb_B3),
+b4 =mean(split_landsatb_B4))
+t
+t = df %>% group_by(class) %>%
+summarise(b1 = mean(split_landsatb_B1),
+b2 = mean(split_landsatb_B2),
+b3 = mean(split_landsatb_B3),
+b4 =mean(split_landsatb_B4),
+b5 = mean(split_landsatb_B5),
+b6 = mean(split_landsatb_B6),
+b7 = mean(split_landsatb_B7),
+b8 = mean(split_landsatb_B8))
+head(df)
+t
+t
+head(df)
+t
+orange <- c(37, 27, 45, 30, 57, 48, 34, 50, 20, 53, 33, 25, 51),
+lemon <- c(12, 17, 20, 32, 16, 30, 30, 37, 25, 42, 13, 56, 13),
+pear <- c(41, 19, 15, 12, 15, 55, 33, 37, 40, 40, 43, 46, 54),
+apple <- c(38, 39, 12, 60, 34, 47, 13, 24, 30, 19, 57, 54, 55)
+orange <- c(37, 27, 45, 30, 57, 48, 34, 50, 20, 53, 33, 25, 51),
+orange <- c(37, 27, 45, 30, 57, 48, 34, 50, 20, 53, 33, 25, 51)
+lemon <- c(12, 17, 20, 32, 16, 30, 30, 37, 25, 42, 13, 56, 13)
+pear <- c(41, 19, 15, 12, 15, 55, 33, 37, 40, 40, 43, 46, 54)
+apple <- c(38, 39, 12, 60, 34, 47, 13, 24, 30, 19, 57, 54, 55)
+df <- data.frame(orange,lemon,pear,apple)
+df
+dist(df,method=jm.dist,by_rows=FALSE)
+cashew=c(0.130,0.113,0.102,0.309,0.228,0.118,305,302)
+cass = c(0.135,0.119,0.121,0.282,0.281,0.167,307,303)
+deg = c(0.124,0.104,0.0849,0.278,0.171,0.0798,304,301)
+nearin = c(0.121,0.0987,0.0763,0.272,0.146,0.0634,303,301)
+reg_m10 = c(0.122,0.0993,0.0769,0.275,0.142,0.0621,303,301)
+reg_l10 =c(0.117,0.0954,0.0742,0.263,0.144,0.0626,303,301)
+sl =c(0.120,0.0985,0.0791,0.263,0.151,0.0678,304,301)
+df_l= data.frame(cashew,cass,deg,nearin,reg_m10,reg_l10,sl)
+dist(df_l,method=jm.dist,by_rows=FALSE)
+d2=dist(df_l,method=jm.dist,by_rows=FALSE)
+d2
+format(round(d2, 2), nsmall = 2)
+format(round(d2, 4), nsmall = 4)
+(d2*100)
+(d2*1000)
+library(spatialEco)
+head(df_l)
+separability(df_l$cashew, df_l$cass)
+setwd("/Users/apple/Dropbox/PKNP")
+data=read.csv("Landsat_alos_chm1.csv")
+jm.dist <- function ( Vector.1 , Vector.2 ) {
+Matrix.1 <- as.matrix (Vector.1)
+Matrix.2 <- as.matrix (Vector.2)
+mean.Matrix.1 <- mean ( Matrix.1 )
+mean.Matrix.2 <- mean ( Matrix.2 )
+mean.difference <- mean.Matrix.1 - mean.Matrix.2
+cv.Matrix.1 <- cov ( Matrix.1 )
+cv.Matrix.2 <- cov ( Matrix.2 )
+p <- ( cv.Matrix.1 + cv.Matrix.2 ) / 2
+# calculate the Bhattacharryya index
+bh.distance <- 0.125 *t ( mean.difference ) * p^ ( -1 ) * mean.difference +
+0.5 * log (det ( p ) / sqrt (det ( cv.Matrix.1 ) * det ( cv.Matrix.2 )))
+# calculate Jeffries-Matusita
+# following formula is bound between 0 and 2.0
+jm.distance <- 2 * ( 1 - exp ( -bh.distance ) )
+# also found in the bibliography:
+# jm.distance <- 1000 * sqrt (   2 * ( 1 - exp ( -bh.distance ) )   )
+# the latter formula is bound between 0 and 1414.0
+return(jm.distance)
+}
+library(tidyverse)
+df = data %>% select(split_landsatb_B1,split_landsatb_B2,split_landsatb_B3,split_landsatb_B4,split_landsatb_B5,split_landsatb_B6,class)
+df$class = as.factor(df$class)
+t = df %>% group_by(class) %>%
+summarise(b1 = mean(split_landsatb_B1),
+b2 = mean(split_landsatb_B2),
+b3 = mean(split_landsatb_B3),
+b4 =mean(split_landsatb_B4),
+b5 = mean(split_landsatb_B5),
+b6 = mean(split_landsatb_B6))
+t
+cashew=c(0.130,0.113,0.102,0.309,0.228,0.118)
+cashew=c(0.130,0.113,0.102,0.309,0.228,0.118)
+cass = c(0.135,0.119,0.121,0.282,0.281,0.167)
+deg = c(0.124,0.104,0.0849,0.278,0.171,0.0798)
+nearin = c(0.121,0.0987,0.0763,0.272,0.146,0.0634)
+reg_m10 = c(0.122,0.0993,0.0769,0.275,0.142,0.0621)
+reg_l10 =c(0.117,0.0954,0.0742,0.263,0.144,0.0626)
+sl =c(0.120,0.0985,0.0791,0.263,0.151,0.0678)
+df_l= data.frame(cashew,cass,deg,nearin,reg_m10,reg_l10,sl)
+library(proxy)
+d2=dist(df_l,method=jm.dist,by_rows=FALSE)
+d2
+f = map_data("france")
+library(ggplot2)
+library(ggmap)
+library(maps)
+library(mapdata)
+f = map_data("france")
+f
+head(f)
+w2hr = map_data("world2Hires")
+ggplot() + geom_polygon(data = f, aes(x=long, y = lat, group = group)) +
+coord_fixed(1.3)
+ggplot() + geom_polygon(data = f, aes(x=long, y = lat,
+group = region)) +
+coord_fixed(1.3)
+ggplot() + geom_polygon(data = f, aes(x=long, y = lat, group = group)) +
+coord_fixed(1.3)
+ggplot() +
+geom_polygon(data = usa, aes(x=long, y = lat, group = group),
+fill = NA, color = "red") +
+coord_fixed(1.3)
+ggplot() +
+geom_polygon(data = f, aes(x=long, y = lat, group = group),
+fill = NA, color = "red") +
+coord_fixed(1.3)
+ggplot() +
+geom_polygon(data = f, aes(x=long, y = lat, group = group),
+fill = "blue", color = "red") +
+coord_fixed(1.3)
+ggplot() +
+geom_polygon(data = f, aes(x=long, y = lat, group = group),
+fill = NA, color = "red")
+ggplot() +
+geom_polygon(data = f, aes(x=long, y = lat, group = group),
+fill = NA, color = "red") +
+coord_fixed(1.3)
+head(f)
+ggplot() + geom_polygon(data = f, aes(x=long, y = lat, group = group)) +
+coord_fixed(1.3)
+ggplot() + geom_polygon(data = f, aes(x=long, y = lat, group = group))
+ggplot() + geom_polygon(data = f, aes(x=long, y = lat, group = group))+
+coord_fixed(1.3)
+ggplot() +
+geom_polygon(data = f, aes(x=long, y = lat, group = group),
+fill = NA, color = "red") +
+coord_fixed(1.3)
+ggplot() +
+geom_polygon(data = f, aes(x=long, y = lat, group = group),
+fill = "blue", color = "red") +
+coord_fixed(1.3)
+vroads =readOGR("VNM_roads.shp")
+setwd("~/Desktop/forecast/Data viz_r/Data and Code/section7")
+# load GIS libraries
+library(raster)
+library(rgdal)
+library(ggplot2)
+library(broom)
+library(RColorBrewer)
+library(rgeos)
+library(dplyr)
+library(maptools)
+vroads =readOGR("VNM_roads.shp")
+class(vroads)
+head(vroads@data)
+plot(vroads,
+main = "Quick plot of Vietnam roads data")
+# convert spatial object to a ggplot ready data frame
+vroads_df = tidy(vroads, region = "id")
+class(vroads_df)
+head(vroads_df)
+# make sure the shapefile attribute table has an id column
+vroads$id <- rownames(vroads@data)
+# join the attribute table from the spatial object to the new data frame
+vroads_df =left_join(vroads_df,
+vroads@data,
+by = "id")
+head(vroads_df)
+# plot the lines data, apply a diff color to each factor level)
+ggplot() +
+geom_path(data = vroads_df, aes(x = long, y = lat, group = group)) +
+labs(title = "ggplot map of roads")
+ggplot() +
+geom_path(data = vroads_df, aes(x = long, y = lat, group = group)) +
+labs(title = "Map of Vietnam's roads")+
+coord_fixed(1.3)
+### Differentiate between trails and roads
+ggplot() +
+geom_path(data = vroads_df, aes(x = long, y = lat,
+group = group,color=F_CODE_DES)) +
+labs(title = "Map of Vietnam's roads")+
+coord_fixed(1.3)
+ggplot() +
+geom_path(data = vroads_df, aes(x = long, y = lat,
+group = group,
+color=F_CODE_DES,
+size=0.4)) + ##change line width
+labs(title = "Vietnam Roads ",
+subtitle = "Colored by road type",
+color = "Road type",
+x = "", y = "") + ##remove x any labels
+theme(axis.text = element_blank(), axis.ticks = element_blank())+
+coord_fixed()
+ggplot() +
+geom_path(data = vroads_df, aes(x = long, y = lat,
+group = group,
+color=F_CODE_DES)) + ##change line width
+labs(title = "Vietnam Roads ",
+subtitle = "Colored by road type",
+color = "Road type",
+x = "", y = "") + ##remove x any labels
+theme(axis.text = element_blank(), axis.ticks = element_blank())+
+coord_fixed()
+ggplot() +
+geom_path(data = vroads_df, aes(x = long, y = lat,
+group = group,
+color=F_CODE_DES,
+size=F_CODE_DES)) + ##change line width
+labs(title = "Vietnam Roads ",
+subtitle = "Colored by road type",
+color = "Road type",
+x = "", y = "") + ##remove x any labels
+theme(axis.text = element_blank(), axis.ticks = element_blank())+
+coord_fixed()

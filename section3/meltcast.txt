@@ -1,0 +1,26 @@
+#################################################################
+
+library(reshape2)
+
+head(airquality) ##wide format
+
+names(airquality) <- tolower(names(airquality))
+
+qty = melt(airquality) 
+
+head(qty)
+tail(qty)
+
+##quantitative values by day and month
+qty2= melt(airquality, id.vars = c("month", "day"))
+head(qty2)
+tail(qty2)
+### Long to wide (cast)
+
+qty3= melt(airquality, id.vars = c("month", "day"))
+
+head(qty3) ##long
+
+aqw = dcast(qty3, month + day ~ variable)
+
+head(aqw)

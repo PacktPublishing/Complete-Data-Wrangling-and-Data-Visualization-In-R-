@@ -1,0 +1,58 @@
+#### add a smoothing line
+
+### fit a regression line through the scatter plot
+
+library(ggplot2)
+
+head(iris)
+
+
+#### Smooth line bw x & y
+ggplot(iris, aes(x=Sepal.Length,y=Sepal.Width))+geom_smooth()
+
+ggplot(data=iris)+
+  geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width))
+
+#### smooth line by species
+
+ggplot(data=iris)+
+  geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+                          linetype=Species))
+
+
+## group by species
+
+ggplot(data=iris)+
+  geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+                          group=Species))
+
+## group by color
+
+ggplot(data=iris)+
+  geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+                          color=Species))
+
+# remove legend
+ggplot(data=iris)+
+  geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+                          color=Species),show.legend = FALSE)
+
+
+###Combine geometries-display the points
+
+ggplot(data=iris,mapping=aes(x=Sepal.Length,y=Sepal.Width))+
+  geom_point(mapping = aes(color=Species))+geom_smooth()
+
+
+ggplot(data=iris)+
+  geom_point(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+                         color=Species))+
+  geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+                          color=Species))
+
+#### or
+
+ggplot(data=iris,mapping=aes(x=Sepal.Length,y=Sepal.Width,
+                             color=Species))+
+         geom_point()+geom_smooth()
+

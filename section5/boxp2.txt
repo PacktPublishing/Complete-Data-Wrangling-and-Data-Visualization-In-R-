@@ -1,0 +1,51 @@
+library(ggplot2)
+
+head(iris)
+
+##change boxplot outline by color
+
+ggplot(iris, aes(x=Species, y=Sepal.Width, color=Species)) +
+  geom_boxplot()
+
+#select own colors
+
+ggplot(iris, aes(x=Species, y=Sepal.Width, color=Species)) +
+  geom_boxplot()+scale_color_manual(values=c("#e41a1c","#377eb8","#4daf4a"))
+
+
+#use a different pallette
+#http://colorbrewer2.org/#type=sequential&scheme=Purples&n=3
+#for qualitative these palettes are recommended
+#Accent, Dark2, Paired, Pastel1, Pastel2, Set1, Set2, Set3
+
+ggplot(iris, aes(x=Species, y=Sepal.Width, color=Species)) +
+  geom_boxplot()+scale_color_brewer(palette="Set3")
+
+##fill by different colors (of Species)
+
+ggplot(iris, aes(x=Species, y=Sepal.Width, fill=Species)) +
+  geom_boxplot()
+
+ggplot(iris, aes(x=Species, y=Sepal.Width, fill=Species)) +
+  geom_boxplot()+scale_fill_brewer(palette = "Dark2")
+
+
+ggplot(iris, aes(x=Species, y=Sepal.Width, fill=Species)) +
+  geom_boxplot()+scale_fill_brewer(palette = "Dark2")+
+  theme(legend.position = "top")
+
+### Multiple groups (we need two qualitative variables)
+
+head(ToothGrowth)
+
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+summary(ToothGrowth)
+
+## have a factor variable on the x-axis
+
+ggplot(ToothGrowth, aes(x=dose, y=len, fill=supp)) +
+  geom_boxplot()
+
+ggplot(ToothGrowth, aes(x=supp, y=len, fill=dose)) +
+  geom_boxplot()

@@ -1,0 +1,23 @@
+#########################################################
+
+library(ggplot2)
+
+head(iris)
+
+##ggplot(data, aes(x=x,y=y))+geom_how to render()
+## aes are aesthetics
+## geom_point()
+
+#### Scatter plot bw x & y
+ggplot(iris, aes(x=Sepal.Length,y=Sepal.Width))+geom_point()
+
+x=ggplot(iris, aes(Sepal.Length,Sepal.Width))
+x+geom_point()
+
+#### Histogram
+
+ggplot(iris, aes(Sepal.Length))+geom_histogram()
+
+#### Line plot for time series
+
+ggplot(economics, aes(date, unemploy))+geom_line()

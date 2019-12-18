@@ -1,0 +1,67 @@
+##### Barplot
+
+######## visualize discrete numerical variables
+
+library(ggplot2)
+
+head(iris)
+
+head(diamonds)
+
+### how many items fall in a factor category?
+### y-axis: count 
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=color))
+
+## or
+
+ggplot(data=diamonds)+stat_count(mapping=aes(x=color))
+
+## outline colors
+ggplot(data=diamonds)+
+    geom_bar(mapping=aes(x=clarity,color=clarity))
+
+##fill with colors
+ggplot(data=diamonds)+
+  geom_bar(mapping=aes(x=clarity,fill=clarity))
+
+## color on the basis of two qualitative variables
+
+ggplot(data=diamonds)+
+  geom_bar(mapping = aes(x=cut, fill=color)) ##stacked bar
+
+###how many diamonds of a color also have a certain cut
+
+ggplot(data=diamonds,mapping = aes(x=cut, fill=color))+
+  geom_bar(alpha=1/5,position = "identity")
+##place each object where it occurs in the context of the graph
+
+###compare individual values
+
+ggplot(data=diamonds)+
+  geom_bar(mapping = aes(x=cut, fill=color),position = "dodge")
+
+### the proportion of each category 
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=color,
+                          y=..prop..,group=1))
+
+########## bar plots of summaries from continuous numeric
+## variables 
+
+library(plyr)
+m =ddply(iris, "Species", summarise, grp.mean=mean(Sepal.Width))
+m
+
+g=ggplot(data=m, aes(x=Species, y=grp.mean)) +
+  geom_bar(stat="identity")
+
+g
+
+# Horizontal bar plot
+g + coord_flip()
+
+### include min, mean, max
+ggplot(data=iris)+
+  stat_summary(mapping=aes(x=Species, y=Sepal.Width),
+               fun.ymin = min,
+               fun.ymax = max,
+               fun.y=mean)

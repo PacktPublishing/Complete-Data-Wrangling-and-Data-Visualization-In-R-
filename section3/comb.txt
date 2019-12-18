@@ -1,0 +1,14 @@
+### Focus on one species alone
+vir1=iris[which(iris$Species=="virginica"),]
+
+head(vir1)
+
+summary(vir1)
+
+vir2=subset(iris, Species=='virginica')
+head(vir2)
+
+## Isolate the Species and Summarize in One step
+
+comb=summary(iris$Petal.Width[iris$Species=='virginica'])
+comb

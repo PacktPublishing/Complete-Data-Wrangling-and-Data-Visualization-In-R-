@@ -1,0 +1,28 @@
+######## add error bar to barplot
+
+library(ggplot2)
+
+head(diamonds)
+
+## factor(x), quant variable(y), color= factor2
+ggplot(diamonds, aes(clarity, price, fill = color)) +
+  stat_summary(geom = "bar", fun.y = mean, position = "dodge") +
+  stat_summary(geom = "errorbar", fun.data = mean_se, position = "dodge")
+
+###use mean & se as the basis of error bar
+
+library(tidyverse)
+
+mse= diamonds %>% 
+  group_by(cut, color) %>% 
+  summarise(new = list(mean_se(price))) %>% ## compute mean & se
+  unnest(new)
+
+mse
+
+mse %>% 
+  ggplot(aes(cut, y = y, fill = color)) +
+  geom_col(position = "dodge") +
+  geom_errorbar(aes(ymin = ymin, ymax = ymax), position = "dodge")
+
+#############################################################

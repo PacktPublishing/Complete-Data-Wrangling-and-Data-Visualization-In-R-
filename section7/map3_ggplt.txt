@@ -1,0 +1,90 @@
+setwd("~/Desktop/forecast/Data viz_r/Data and Code/section7")
+
+## install raster, rgdal, rgeos 
+
+# load GIS libraries
+library(raster)
+library(rgdal)
+library(ggplot2)
+library(broom)
+library(RColorBrewer)
+library(rgeos)
+library(dplyr)
+library(maptools)
+
+vroads =readOGR("VNM_roads.shp")
+
+## .shp data (vector) are good for representing discrete features
+## such as roads, NATIONAL boundaries
+
+class(vroads) ##linear data are SpatialLinesDataFrame
+
+head(vroads@data)
+
+plot(vroads,
+     main = "Quick plot of Vietnam roads data")
+
+### ggplot needs data frame
+
+# convert spatial object to a ggplot ready data frame
+vroads_df = tidy(vroads, region = "id")
+# make sure the shapefile attribute table has an id column
+vroads$id <- rownames(vroads@data)
+
+# join the attribute table from the spatial object to the new data frame
+vroads_df =left_join(vroads_df,
+                           vroads@data,
+                           by = "id")
+
+head(vroads_df)
+
+# plot the lines data, apply a diff color to each factor level)
+ggplot() +
+  geom_path(data = vroads_df, aes(x = long, y = lat, group = group)) +
+  labs(title = "ggplot map of roads")
+
+
+ggplot() +
+  geom_path(data = vroads_df, aes(x = long, y = lat, group = group)) +
+  labs(title = "Map of Vietnam's roads")+ 
+  coord_fixed(1.3)
+
+###It fixes the relationship between one unit in the y 
+###direction and one unit in the x direction.
+
+### Differentiate between trails and roads 
+ggplot() +
+  geom_path(data = vroads_df, aes(x = long, y = lat, 
+                                  group = group,color=F_CODE_DES)) +
+  labs(title = "Map of Vietnam's roads")+ 
+  coord_fixed(1.3)
+
+### improve
+
+ggplot() +
+  geom_path(data = vroads_df, aes(x = long, y = lat, 
+                                  group = group,
+                                  color=F_CODE_DES)) + ##change line width
+  labs(title = "Vietnam Roads ",
+       subtitle = "Colored by road type",
+       color = "Road type",
+       x = "", y = "") + ##remove x any labels
+  theme(axis.text = element_blank(), axis.ticks = element_blank())+ 
+  coord_fixed()
+
+
+ggplot() +
+  geom_path(data = vroads_df, aes(x = long, y = lat, 
+                                  group = group,
+                                  color=F_CODE_DES,
+                                  size=F_CODE_DES)) + ##change line width
+  labs(title = "Vietnam Roads ",
+       subtitle = "Colored by road type",
+       color = "Road type",
+       x = "", y = "") + ##remove x any labels
+  theme(axis.text = element_blank(), axis.ticks = element_blank())+ 
+  coord_fixed()
+
+#################################################################
+#################################################################
+

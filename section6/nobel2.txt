@@ -1,0 +1,83 @@
+##############################################################
+##
+
+setwd("~/Desktop/forecast/Data viz_r/Data and Code/section7")
+
+getwd()
+
+library(tidyverse) ##will read in ggplot and dplyr
+
+nobel=read.csv("nobelp.csv")
+
+head(nobel)
+
+str(nobel)
+
+##Top country of birth for Nobel prize winners
+nobel_c = nobel %>% 
+  ##remove NAs
+  filter(Sex != '')%>% ## retain non-empty Sex rows
+  filter(!is.na(Birth.Country)) %>%
+  ## group by Birth country
+  group_by(Birth.Country) %>%
+  rename(region = Birth.Country) %>%
+  summarise(value = n())
+
+nobel_c %>%
+  arrange(desc(value))%>% ## largest to smallest
+  head(10)
+
+### Individual vs Organizations
+
+individuals = nobel[ nobel$Laureate.Type == "Individual" , ]
+organizations = nobel [ nobel$Laureate.Type == "Organization" , ]
+
+### which country has the highest number of individual laureates? 
+
+indi_laut = individuals %>%
+  select(Birth.Country) %>% 
+  group_by(Birth.Country) %>% 
+  summarise(number = n()) %>% 
+  arrange(-number)
+
+head(indi_laut)
+
+### which country has the highest number of org laureates? 
+
+org_laut = organizations %>%
+  select(Birth.Country) %>% 
+  group_by(Birth.Country) %>% 
+  summarise(number = n()) %>% 
+  arrange(-number)
+
+head(org_laut)
+
+##highest number of female laurates in a country
+
+laut_s = individuals %>%
+  select(Sex,Birth.Country) %>% ## select columns
+  group_by(Sex,Birth.Country) %>%
+  summarise( number = n() ) %>%
+  arrange (-number)
+
+head(laut_s)
+
+laut_f = individuals %>%
+  filter(Sex=="Female")%>% ## retain the females
+  select(Birth.Country) %>%
+  group_by(Birth.Country) %>%
+  summarise( number = n() ) %>%
+  arrange (-number)
+
+head(laut_f)
+
+## what category
+
+laut_c = individuals %>%
+  filter(Sex=="Female")%>%
+  select(Birth.Country,Category) %>%
+  group_by(Birth.Country,Category) %>% ##group on basis of 2factors
+  summarise( number = n() ) %>%
+  arrange (-number)
+
+head(laut_c)

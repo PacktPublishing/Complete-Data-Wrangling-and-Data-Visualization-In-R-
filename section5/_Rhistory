@@ -1,0 +1,512 @@
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer))+
+facet_grid(cyl ~ manufacturer)
+ggplot(data=mpg)+
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer))+
+facet_grid(cyl ~ drv)
+unique(mpg$fl)
+ggplot(data=mpg)+
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer))+
+facet_grid(cyl ~ fl)
+ggplot(data=mpg)+
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer))+
+facet_grid(. ~ fl)
+install.packages("rbokeh")
+ggplot(data=mpg)+
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer))+
+facet_grid(. ~ fl)
+### vertical grid
+ggplot(data=mpg)+
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer))+
+facet_grid(fl ~.)
+ggplot(data=mpg)+
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer))+
+facet_grid(cyl ~ fl)
+ggplot(data=mpg)+
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer))+
+facet_grid(cyl ~ fl)+
+theme(strip.text.x = element_text(size=8, angle=75),
+strip.text.y = element_text(size=12, face="bold"),
+strip.background = element_rect(colour="red", fill="#CCCCFF"))
+ggplot(data=mpg)+
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer))+
+facet_grid(cyl ~ fl)+
+theme(strip.text.x = element_text(size=8, angle=75),
+strip.text.y = element_text(size=12, face="bold"),
+strip.background = element_rect(colour="red", fill="green"))
+head(mpg)
+g <- ggplot(mpg, aes(hwy, cty)) + geom_point()
+g
+unique(mpg$fl)
+g + facet_grid(rows = vars(fl))
+ggplot(data=mpg)+
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer)) +
+facet_grid(rows = vars(fl))
+ggplot(data=mpg)+
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer)) +
+facet_grid(cols = vars(fl))
+ggplot(data=mpg)+
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer))+
+facet_grid(fl ~.)
+ggplot(data=mpg)+
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer))+
+facet_grid(. ~ fl)
+g <- ggplot(mtcars, aes(mpg, wt, colour = factor(cyl))) +
+geom_point()
+g + facet_grid(. ~ cyl, scales = "free")
+library(ggplot2)
+head(iris)
+ggplot(data=mpg)+
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer))+
+facet_wrap(~ manufacturer, nrow=3)
+head(mpg)
+g <- ggplot(mpg, aes(hwy, cty)) + geom_point()
+g
+unique(mpg$fl)
+ggplot(data=mpg)+
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer)) +
+facet_grid(rows = vars(fl))
+ggplot(data=mpg)+
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer))+
+facet_grid(fl ~.)
+ggplot(data=mpg)+
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer)) +
+facet_grid(cols = vars(fl))
+ggplot(data=mpg)+
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer))+
+facet_grid(. ~ fl)
+## facet on the basis of 2 categorical variables
+## cyl: vertical
+ggplot(data=mpg)+
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer))+
+facet_grid(cyl ~ fl)
+ggplot(data=mpg)+
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer))+
+facet_grid(fl~cyl)
+## modify facet label
+ggplot(data=mpg)+
+geom_point(mapping=aes(cty,hwy,
+color=manufacturer))+
+facet_grid(cyl ~ fl)+
+theme(strip.text.x = element_text(size=8, angle=75),
+strip.text.y = element_text(size=12, face="bold"),
+strip.background = element_rect(colour="red", fill="green"))
+g <- ggplot(mtcars, aes(mpg, wt, colour = factor(cyl))) +
+geom_point()
+g
+g + facet_grid(. ~ cyl, scales = "free")
+library(ggplot2)
+head(iris)
+#### Smooth line bw x & y
+ggplot(iris, aes(x=Sepal.Length,y=Sepal.Width))+geom_smooth()
+ggplot(data=iris)+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width))
+ggplot(data=iris)+
+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+linetype=Species))
+ggplot(data=iris)+
+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+group=Species))
+ggplot(data=iris)+
+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+color=Species))
+# remove legend
+ggplot(data=iris)+
+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+color=Species),show.legend = FALSE)
+library(ggplot2)
+head(iris)
+#### Smooth line bw x & y
+ggplot(iris, aes(x=Sepal.Length,y=Sepal.Width))+geom_smooth()
+ggplot(data=iris)+
+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width))
+ggplot(data=iris)+
+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+linetype=Species))
+ggplot(data=iris)+
+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+group=Species))
+ggplot(data=iris)+
+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+color=Species))
+# remove legend
+ggplot(data=iris)+
+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+color=Species),show.legend = FALSE)
+ggplot(data=iris)+
+geom_point(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+color=Species))+
+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+color=Species))
+library(ggplot2)
+head(iris)
+#### Smooth line bw x & y
+ggplot(iris, aes(x=Sepal.Length,y=Sepal.Width))+geom_smooth()
+ggplot(data=iris)+
+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width))
+ggplot(data=iris)+
+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+linetype=Species))
+ggplot(data=iris)+
+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+group=Species))
+ggplot(data=iris)+
+geom_point(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+color=Species))+
+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+color=Species))
+ggplot(data=iris,mapping=aes(x=Sepal.Length,y=Sepal.Width,
+geom_point()+geom_smooth()
+ggplot(data=iris,mapping=aes(x=Sepal.Length,y=Sepal.Width,
+color=Species))+
+geom_point()+geom_smooth()
+ggplot(data=iris,mapping=aes(x=Sepal.Length,y=Sepal.Width))+
+geom_point(mapping = aes(color=Species))+geom_smooth()
+ggplot(data=iris,mapping=aes(x=Sepal.Length,y=Sepal.Width))+
+geom_point(mapping = aes(color=Species))
+head(iris)
+#### Smooth line bw x & y
+ggplot(iris, aes(x=Sepal.Length,y=Sepal.Width))+geom_smooth()
+ggplot(data=iris)+
+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width))
+ggplot(data=iris)+
+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+linetype=Species))
+ggplot(data=iris)+
+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+group=Species))
+ggplot(data=iris)+
+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+color=Species))
+# remove legend
+ggplot(data=iris)+
+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+color=Species),show.legend = FALSE)
+ggplot(data=iris,mapping=aes(x=Sepal.Length,y=Sepal.Width))+
+geom_point(mapping = aes(color=Species))+geom_smooth()
+ggplot(data=iris)+
+geom_point(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+color=Species))+
+geom_smooth(mapping=aes(x=Sepal.Length,y=Sepal.Width,
+color=Species))
+ggplot(data=iris,mapping=aes(x=Sepal.Length,y=Sepal.Width,
+color=Species))+
+geom_point()+geom_smooth()
+library(ggplot2)
+head(iris)
+ggplot(iris,aes(Sepal.Width))+geom_histogram()
+ggplot(iris,aes(Sepal.Width))
+ggplot(iris,aes(Sepal.Width))+geom_histogram(binwidth = 0.001)
+ggplot(iris,aes(Sepal.Width))+geom_histogram(binwidth = 0.01)
+ggplot(iris,aes(Sepal.Width))+geom_histogram(binwidth = 100)
+ggplot(iris,aes(Sepal.Width))+geom_histogram(binwidth = 10)
+ggplot(iris,aes(Sepal.Width))+geom_histogram(binwidth = 2)
+ggplot(iris,aes(Sepal.Width))+geom_histogram(binwidth = 0.5)
+ggplot(iris,aes(Sepal.Width, fill=Species))+geom_histogram()
+ggplot(iris,aes(Sepal.Width, fill=Species))+geom_freqpoly()
+head(diamonds)
+ggplot(diamonds, aes(price, colour = cut)) +
+geom_freqpoly(binwidth = 400)
+ggplot(diamonds, aes(price, colour = clarity)) +
+geom_freqpoly(binwidth = 400)
+ggplot(diamonds, aes(price,stat(density), colour = clarity)) +
+geom_freqpoly(binwidth = 400)
+ggplot(iris,aes(Sepal.Width, fill=Species))+
+geom_histogram(color="black", fill="red",
+linetype="dashed")
+library(plyr)
+m =ddply(iris, "Species", summarise, grp.mean=mean(Sepal.Width))
+m
+ggplot(iris, aes(x=Sepal.Width, color=Species)) +
+geom_histogram(fill="white", position="dodge")+
+theme(legend.position="top")
+g=ggplot(iris, aes(x=Sepal.Width, color=Species)) +
+geom_histogram(fill="white", position="dodge")+
+theme(legend.position="top")
+g
+g+geom_vline(data=m, aes(xintercept=grp.mean, color=Species),
+linetype="dashed")+
+theme(legend.position="top")
+g+geom_vline(data=m, aes(xintercept=grp.mean, color=Species),
+linetype="dashed")+
+theme(legend.position="top")+scale_color_manual(values=c("#999999", "#E69F00", "#56B4E9"))
+ggplot(iris,aes(Sepal.Width, fill=Species, color=Species))
++geom_histogram()
+ggplot(iris,aes(Sepal.Width, fill=Species, color=Species))+
+geom_histogram()
+ggplot(iris,aes(Sepal.Width))+geom_histogram()
+ggplot(iris,aes(Sepal.Width))+geom_histogram(binwidth = 0.01)
+ggplot(iris,aes(Sepal.Width))+geom_histogram(binwidth = 0.5)
+ggplot(iris,aes(Sepal.Width, fill=Species))+geom_histogram()
+ggplot(iris,aes(Sepal.Width, fill=Species, color=Species))+
+geom_histogram()
+ggplot(iris,aes(Sepal.Width,color=Species))+
+geom_histogram()
+ggplot(iris,aes(Sepal.Width, fill=Species))+
+geom_histogram(color="black", fill="red",
+linetype="dashed")
+ggplot(iris,aes(Sepal.Width))+
+geom_histogram(color="black", fill="red",
+linetype="dashed")
+m =ddply(iris, "Species", summarise, grp.mean=mean(Sepal.Width))
+m
+g=ggplot(iris, aes(x=Sepal.Width, color=Species)) +
+geom_histogram(fill="white", position="dodge")+
+theme(legend.position="top")
+g
+g=ggplot(iris, aes(x=Sepal.Width, color=Species)) +
+geom_histogram(fill="white", position="dodge")+
+theme(legend.position="bottom")
+g
+g+geom_vline(data=m, aes(xintercept=grp.mean, color=Species),
+linetype="dashed")+
+theme(legend.position="top")
+# customize color
+g+geom_vline(data=m, aes(xintercept=grp.mean, color=Species),
+linetype="dashed")+
+theme(legend.position="top")+scale_color_manual(values=c("#999999", "#E69F00", "#56B4E9"))
+# customize color
+g+geom_vline(data=m, aes(xintercept=grp.mean, color=Species),
+linetype="dashed")+
+theme(legend.position="top")+scale_color_manual(values=c("red", "yellow", "green"))
+head(diamonds)
+ggplot(diamonds, aes(price, colour = clarity)) +
+geom_freqpoly(binwidth = 400)
+ggplot(diamonds, aes(price,stat(density), colour = clarity)) +
+geom_freqpoly(binwidth = 400)
+ggplot(diamonds, aes(price,stat(density), colour = cut)) +
+geom_freqpoly(binwidth = 400)
+install.packages("ggpubr")
+head(diamonds)
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=color))
+ggplot(data=diamonds)+stat_count(mapping=aes(x=color))
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=color
+y=..prop..,group=1))
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=color,
+y=..prop..,group=1))
+library(ggplot2)
+library(plyr)
+m =ddply(iris, "Species", summarise, grp.mean=mean(Sepal.Width))
+m
+g=ggplot(data=m, aes(x=Species, y=grp.mean)) +
+geom_bar(stat="identity")
+g
+# Horizontal bar plot
+g + coord_flip()
+ggplot(data=iris)+
+stat_summary(mapping=aes(x=Species, y=grp.mean),
+fun.ymin = min,
+fun.ymax = max,
+fun.y=median)
+library(plyr)
+m =ddply(iris, "Species", summarise, grp.mean=mean(Sepal.Width))
+m
+g=ggplot(data=m, aes(x=Species, y=grp.mean)) +
+geom_bar(stat="identity")
+g
+# Horizontal bar plot
+g + coord_flip()
+ggplot(data=iris)+
+stat_summary(mapping=aes(x=Species, y=grp.mean),
+fun.ymin = min,
+fun.ymax = max,
+fun.y=median)
+ggplot(data=iris)+
+stat_summary(mapping=aes(x=Species, y=Sepal.Width),
+fun.ymin = min,
+fun.ymax = max,
+fun.y=median)
+ggplot(data=iris)+
+stat_summary(mapping=aes(x=Species, y=Sepal.Width),
+fun.ymin = min,
+fun.ymax = max,
+fun.y=mean)
+### how many items fall in a factor category?
+### y-axis: count
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=color))
+head(diamonds)
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=cut,color=cut))
+ggplot(data=diamonds)+
+geom_bar(mapping=aes(x=clarity,color=clarity))
+##fill with colors
+ggplot(data=diamonds)+
+geom_bar(mapping=aes(x=clarity,fill=clarity))
+ggplot(data=diamonds)+
+geom_bar(mapping = aes(x=cut, fill=color))
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=cut,fill=color,
+y=..prop..,group=1))
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=cut,fill=color,y=..prop..,group=1))
+ggplot(data=diamonds,mapping = aes(x=cut, fill=color))+
+geom_bar(alpha=1/5,position = "identity"))
+ggplot(data=diamonds,mapping = aes(x=cut, fill=color))+
+geom_bar(alpha=1/5,position = "identity")
+ggplot(data=diamonds)+
+geom_bar(mapping = aes(x=cut, fill=color,position="fill"))
+ggplot(data=diamonds)+
+geom_bar(mapping = aes(x=cut, fill=clarity,position="fill"))
+ggplot(data=diamonds)+
+geom_bar(mapping = aes(x=cut, fill=color),position = "dodge")
+head(diamonds)
+### how many items fall in a factor category?
+### y-axis: count
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=color))
+ggplot(data=diamonds)+stat_count(mapping=aes(x=color))
+## outline colors
+ggplot(data=diamonds)+
+geom_bar(mapping=aes(x=clarity,color=clarity))
+##fill with colors
+ggplot(data=diamonds)+
+geom_bar(mapping=aes(x=clarity,fill=clarity))
+ggplot(data=diamonds)+
+geom_bar(mapping = aes(x=cut, fill=color)) ##stacked bar
+ggplot(data=diamonds,mapping = aes(x=cut, fill=color))+
+geom_bar(alpha=1/5,position = "identity")
+ggplot(data=diamonds)+
+geom_bar(mapping = aes(x=cut, fill=color),position = "dodge")
+### the proportion of each category
+ggplot(data=diamonds)+geom_bar(mapping=aes(x=color,
+y=..prop..,group=1))
+m =ddply(iris, "Species", summarise, grp.mean=mean(Sepal.Width))
+m
+g=ggplot(data=m, aes(x=Species, y=grp.mean)) +
+geom_bar(stat="identity")
+g
+# Horizontal bar plot
+g + coord_flip()
+### include min, mean, max
+ggplot(data=iris)+
+stat_summary(mapping=aes(x=Species, y=Sepal.Width),
+fun.ymin = min,
+fun.ymax = max,
+fun.y=mean)
+library(dplyr)
+library(tidyverse)
+x=diamonds %>%
+count(color)
+x
+g= ggplot(x, aes(x="", y=n, fill=color))
+g + coord_polar("y", start=0)
+x=diamonds %>%
+count(cut)
+x
+g= ggplot(x, aes(x="", y=n, fill=cut))
+g + coord_polar("y", start=0)
+x=as.data.frame(x)
+x
+g= ggplot(x, aes(x="", y=n, fill=cut))
+g + coord_polar("y", start=0)
+library(ggplot2)
+head(diamonds)
+ggplot(diamonds, aes(cut, price, fill = color)) +
+stat_summary(geom = "bar", fun.y = mean, position = "dodge") +
+stat_summary(geom = "errorbar", fun.data = mean_se, position = "dodge")
+ggplot(diamonds, aes(price, fill = color)) +
+stat_summary(geom = "bar", fun.y = mean, position = "dodge") +
+stat_summary(geom = "errorbar", fun.data = mean_se, position = "dodge")
+ggplot(diamonds, aes(cut, price, fill = color)) +
+stat_summary(geom = "bar", fun.y = mean, position = "dodge") +
+stat_summary(geom = "errorbar", fun.data = mean_se, position = "dodge")
+library(tidyverse)
+mse= diamonds %>%
+group_by(cut, color) %>%
+summarise(new = list(mean_se(price))) %>%
+unnest(new)
+mse
+mse %>%
+ggplot(aes(cut, y = y, fill = color)) +
+geom_col(position = "dodge") +
+geom_errorbar(aes(ymin = ymin, ymax = ymax), position = "dodge")
+head(diamonds)
+## factor(x), quant variable(y), color= factor2
+ggplot(diamonds, aes(clarity, price, fill = color)) +
+stat_summary(geom = "bar", fun.y = mean, position = "dodge") +
+stat_summary(geom = "errorbar", fun.data = mean_se, position = "dodge")
+mse
+mse %>%
+ggplot(aes(cut, y = y, fill = color)) +
+geom_col(position = "dodge") +
+geom_errorbar(aes(ymin = ymin, ymax = ymax), position = "dodge")
+setwd("/Users/apple/Desktop/forecast/Data viz_r")
+setwd("/Users/apple/Desktop/forecast/Data viz_r/Data and Code")
+setwd("/Users/apple/Desktop/forecast/Data viz_r/Data and Code/section5")
+library(tidyverse)
+df <- read_csv("../input/NFA 2018.csv",
+col_types = cols(
+country = col_character(),
+`ISO alpha-3 code` = col_character(),
+UN_region = col_character(),
+UN_subregion = col_character(),
+year = col_integer(),
+record = col_character(),
+crop_land = col_double(),
+grazing_land = col_double(),
+forest_land = col_double(),
+fishing_ground = col_double(),
+built_up_land = col_double(),
+carbon = col_double(),
+total = col_double(),
+`Percapita GDP (2010 USD)` = col_double(),
+population = col_double()
+))
+df <- read_csv("NFA 2018.csv",
+col_types = cols(
+country = col_character(),
+`ISO alpha-3 code` = col_character(),
+UN_region = col_character(),
+UN_subregion = col_character(),
+year = col_integer(),
+record = col_character(),
+crop_land = col_double(),
+grazing_land = col_double(),
+forest_land = col_double(),
+fishing_ground = col_double(),
+built_up_land = col_double(),
+carbon = col_double(),
+total = col_double(),
+`Percapita GDP (2010 USD)` = col_double(),
+population = col_double()
+))
+head(df)
+##summarize data
+sea = df %>%
+filter(UN_subregion == "South-Eastern Asia") %>%
+group_by(country , year) %>%
+summarize(crop_mean = mean(crop_land , na.rm = TRUE))
+head(sea)
+##summarize data
+sea = df %>%
+filter(UN_subregion == "South-Eastern Asia") %>%
+group_by(country , year) %>%
+summarize(forest_avg = mean(forest_land , na.rm = TRUE))
+head(sea)
+tail(sea)
+ggplot(sea,aes(x = year , y = crop_mean , color = country)) +
+geom_line()+
+ggtitle("Forest Cover Area")
+ggplot(sea,aes(x = year , y = forest_avg , color = country)) +
+geom_line()+
+ggtitle("Forest Cover Area")
+ggplot(sea,aes(x = year , y = forest_avg , color = country)) +
+geom_line()+
+ggtitle("Forest Cover Area")+xlab("Forest cover")
+head(sea)
+head(df)
+head(sea)

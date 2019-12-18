@@ -1,0 +1,66 @@
+##############################################################
+##
+
+setwd("~/Desktop/forecast/Data viz_r/Data and Code")
+
+getwd()
+
+library(tidyverse) ##will read in ggplot and dplyr
+
+nobel=read.csv("nobelp.csv")
+
+head(nobel)
+
+str(nobel)
+
+## What is the most frequent of birth countries of the Nobel Prize winners?
+
+nobel %>% group_by(Birth.Country) %>% count()
+
+## filter out 
+nobel %>%filter(!is.na(Birth.Country) & Sex != '') %>%
+  group_by(Birth.Country) %>% count()
+
+
+##First Female Laureates per Category
+
+#isolate females
+f=nobel %>% filter(Sex=="Female")
+head(f)
+
+#which category are they in?
+c=f%>%group_by(Category)
+head(c)
+
+#select Year, full name, category
+
+cat=c%>%select(Year,Full.Name,Category,Birth.Country)%>%
+  top_n(1,desc(Year))
+
+head(cat)
+
+## Has any one won more than once?
+## Marie Curie
+prizeswon=nobel %>% group_by(Full.Name)%>%summarize(Prize_Count=n())
+      
+prizeswon
+
+##filter those who won more than 1 prize      
+more=prizeswon%>%filter(Prize_Count>1)
+more
+
+## How are men and women represented across the different
+## Nobel Prize categories?
+
+sex=nobel %>% group_by(Category,Sex)%>%filter(!Sex=="")%>% summarize(c=n())
+## filter remove empty values
+sex
+
+percent=sex%>%mutate(percent=c/sum(c))#add a new column percent
+percent
+
+percent%>%ggplot(aes(Category,percent,fill=Sex))+geom_bar(stat="identity",alpha=0.5,position="Dodge")+
+  scale_fill_manual(values=rainbow(5))+labs(title="Prize won by Category and Gender")
+
+
+nobel %>% filter(Sex=="Female")%>%group_by(Category)%>%select(Year,Full.Name,Category,Birth.Country)%>%top_n(1,desc(Year))

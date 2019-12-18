@@ -1,0 +1,99 @@
+############## facet
+
+######### Helps split visualization into subplots
+######### based on the number of categories in the categorical variable
+
+library(ggplot2)
+head(iris)
+
+##facet: 1 row
+ggplot(data=iris)+
+  geom_point(mapping=aes(Sepal.Length,Sepal.Width,
+                         color=Species))+
+  facet_wrap(~ Species, nrow=1)
+
+head(mpg)
+names(mpg)
+
+unique(mpg$manufacturer)
+
+
+ggplot(data=mpg)+
+  geom_point(mapping=aes(cty,hwy,
+                         color=manufacturer))+
+  facet_wrap(~ manufacturer, nrow=3)
+
+########## facet grid
+####forms a matrix of panels defined by row and column faceting variables. 
+####It is most useful when you have two discrete variables
+
+head(mpg)
+
+g <- ggplot(mpg, aes(hwy, cty)) + geom_point()
+g
+
+unique(mpg$fl)
+
+
+### horizontal gridding
+
+ggplot(data=mpg)+
+  geom_point(mapping=aes(cty,hwy,
+                         color=manufacturer)) + 
+  facet_grid(rows = vars(fl)) ## fl- basis of subplotting 
+
+##or
+
+ggplot(data=mpg)+
+  geom_point(mapping=aes(cty,hwy,
+                         color=manufacturer))+
+  facet_grid(fl ~.)
+
+
+### vertical grid
+
+ggplot(data=mpg)+
+  geom_point(mapping=aes(cty,hwy,
+                         color=manufacturer)) + 
+  facet_grid(cols = vars(fl))
+
+##or
+
+ggplot(data=mpg)+
+  geom_point(mapping=aes(cty,hwy,
+                         color=manufacturer))+
+  facet_grid(. ~ fl)
+
+
+## facet on the basis of 2 categorical variables
+## cyl: rows 
+##fl: columns
+## row ~  col
+ggplot(data=mpg)+
+  geom_point(mapping=aes(cty,hwy,
+                         color=manufacturer))+
+  facet_grid(cyl ~ fl)
+
+ggplot(data=mpg)+
+  geom_point(mapping=aes(cty,hwy,
+                         color=manufacturer))+
+  facet_grid(fl~cyl)
+
+## modify facet label
+ggplot(data=mpg)+
+  geom_point(mapping=aes(cty,hwy,
+                         color=manufacturer))+
+  facet_grid(cyl ~ fl)+
+  theme(strip.text.x = element_text(size=8, angle=75),
+        strip.text.y = element_text(size=12, face="bold"),
+        strip.background = element_rect(colour="red", fill="green"))
+
+ ## free scales
+## choose whether the scales should be constant
+# across all panels (the default), or whether they should be allowed
+# to vary
+
+g <- ggplot(mtcars, aes(mpg, wt, colour = factor(cyl))) +
+  geom_point()
+
+g + facet_grid(. ~ cyl, scales = "free")

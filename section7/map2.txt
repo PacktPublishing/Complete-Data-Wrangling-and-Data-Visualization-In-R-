@@ -1,0 +1,49 @@
+library(rnaturalearth)
+##https://www.naturalearthdata.com/downloads/
+library(sp)
+
+### ne_coastline ---> boundaries of coasts
+sp::plot(ne_coastline())
+
+### ne_countries ---> boundaries of countries
+
+# world at small scale (low resolution)
+sp::plot(ne_countries(type = 'countries', scale = 'small'))
+
+# world at small scale (medium resolution)
+sp::plot(ne_countries(type = 'countries', scale = 'medium'))
+
+## country boundaries
+
+sp::plot(ne_countries(country = 'France', type='countries'))
+
+f = ne_countries(country = "Finland") # `France` borders
+class(f)
+
+f
+
+plot(f) ## boundaries of France
+
+### regions of UK (Eng, Scot, Wales)
+
+sp::plot(ne_countries(country = 'united kingdom', type='map_units'))
+
+# states country=belgium
+# plot regions of Belgium
+sp::plot(ne_states(country = 'belgium'))
+
+b=ne_states(country = 'belgium')
+
+class(b) ##SpatialPolygonsDataFrame
+
+head(b@data) ## see the information about different regions
+
+summary(b@data)
+
+n =length(b$name_en) ##region names
+n
+
+plot(b, col=rainbow(n)) ## colour by region
+
+# Now add name of the indiviudal regions to the map
+text(b, b$name_en, cex=0.5)

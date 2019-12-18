@@ -1,0 +1,43 @@
+############################################################
+#### Line Chart (temporal/time series data)
+
+setwd("/Users/apple/Desktop/forecast/Data viz_r/Data and Code/section5")
+
+library(tidyverse)
+
+df = read_csv("NFA 2018.csv",
+               col_types = cols(
+                 country = col_character(),
+                 `ISO alpha-3 code` = col_character(),
+                 UN_region = col_character(),
+                 UN_subregion = col_character(),
+                 year = col_integer(),
+                 record = col_character(),
+                 crop_land = col_double(),
+                 grazing_land = col_double(),
+                 forest_land = col_double(),
+                 fishing_ground = col_double(),
+                 built_up_land = col_double(),
+                 carbon = col_double(),
+                 total = col_double(),
+                 `Percapita GDP (2010 USD)` = col_double(),
+                 population = col_double()
+               ))
+
+head(df)
+
+##summarize data
+sea = df %>%
+  filter(UN_subregion == "South-Eastern Asia") %>%
+  group_by(country , year) %>%
+  summarize(forest_avg = mean(forest_land , na.rm = TRUE)) 
+
+head(sea)
+tail(sea)
+
+## how has the average forest cover changed from 1982-2013
+## from different countries
+
+ggplot(sea,aes(x = year , y = forest_avg , color = country)) +
+  geom_line()+
+  ggtitle("Forest Cover Area")

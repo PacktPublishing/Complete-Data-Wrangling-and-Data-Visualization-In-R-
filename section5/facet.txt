@@ -1,0 +1,24 @@
+############## facet
+
+######### Helps split visualization into subplots
+######### based on the number of categories in the categorical variable
+
+library(ggplot2)
+head(iris)
+
+##facet: 1 row
+ggplot(data=iris)+
+  geom_point(mapping=aes(Sepal.Length,Sepal.Width,
+                         color=Species))+
+  facet_wrap(~ Species, nrow=1)
+
+head(mpg)
+names(mpg)
+
+unique(mpg$manufacturer)
+
+ggplot(data=mpg)+
+  geom_point(mapping=aes(cty,hwy,
+                         color=manufacturer))+
+  facet_wrap(~ manufacturer, nrow=3)
+ 
